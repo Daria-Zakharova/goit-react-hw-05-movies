@@ -6,6 +6,7 @@ export const NavList = styled.ul`
     display: flex;
     padding: 40px 0 0 100px;
     border-bottom: 2px solid black;
+    
 `;
 
 export const NavItem = styled(NavLink)`
@@ -27,6 +28,7 @@ export const NavItem = styled(NavLink)`
     }
 
     &.active {
+        height: 32px;
         background-color: #fff;
         border-bottom: none;
         cursor: default;

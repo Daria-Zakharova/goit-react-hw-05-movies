@@ -6,10 +6,14 @@ export const Home = () => {
     const [trending, setTrending] = useState([]);
     useEffect(() => {
         const getTrending = async () => {
-            setTrending(await(await getMovies()).data.results);
+            setTrending(await(await getMovies({requestType: 'trending' })).data.results);
         }
         getTrending();
     }, []);
     
-    return (<MovieList movies = {trending}/>);
+    return (
+    <>
+        <MovieList movies = {trending}/>
+        
+    </>);
 };

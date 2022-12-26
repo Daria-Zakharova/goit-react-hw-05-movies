@@ -10,8 +10,11 @@ export const MovieList = ({movies}) => {
                 const year = date.getFullYear();
                 return (
                     <li key = {id}>
-                        <RiMovieLine className="show-info-icon"/> <Link to={id}>{title} - {year}</Link>
-                        <span>{overview}</span>
+                        <RiMovieLine className={overview ? "show-info-icon" : "disabled-info-icon"} size="25px"/> 
+                        <div className="movie-item-wrap">
+                            <Link to={`/movies/${id}`}> {title} {release_date && "- " + year}</Link>
+                            {overview && <p>{overview}</p>}
+                        </div>
                         
                     </li>
                 )

@@ -5,7 +5,8 @@ export const globalStyle = {
       fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif`,
-        boxSizing: 'border-box',        
+        boxSizing: 'border-box',
+        fontSize: '20px',        
     },
     
     ul: {
@@ -28,5 +29,9 @@ export const globalStyle = {
     p: {
       margin: 0,
       padding: 0,
+    },
+
+    button: {
+      cursor: 'pointer',
     }
   };

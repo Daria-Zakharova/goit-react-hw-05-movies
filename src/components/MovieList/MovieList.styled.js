@@ -6,23 +6,18 @@ export const Movies = styled.ul`
     width: fit-content;
     
     li {
+        position: relative;
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
         gap: 5px 10px;
         margin-bottom: 10px;
 
-        a{
-            transition: text-decoration 200ms linear;
-            &:hover {
-                text-decoration: underline;
-            } 
+        svg {
+            position: absolute;
         }
 
-        span {
-            display: none;
+        .disabled-info-icon {
+            opacity: .2;
         }
-
         .show-info-icon {
             transition: transform 100ms linear;
         }
@@ -30,10 +25,28 @@ export const Movies = styled.ul`
         .show-info-icon:hover {
             transform: rotate(90deg);
 
-            &~span {
+            &~div p {
                 display: block;
-                width: 100%;
-                font-size: 14px;
+                padding: 20px;
+                font-size: 16px;
+                background-color: #ddd;
+            }
+        }
+
+        .movie-item-wrap {
+           padding-left: 40px;
+           max-width: 600px;
+
+            a {                
+                transition: text-decoration 200ms linear;
+                
+                &:hover {
+                    text-decoration: underline;
+                } 
+            }
+
+            p {
+                display: none;
             }
         }
     }`;
