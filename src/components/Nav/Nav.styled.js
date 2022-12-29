@@ -31,10 +31,11 @@ export const NavItem = styled(NavLink)`
         height: 32px;
         background-color: #fff;
         border-bottom: none;
-        cursor: default;
+        cursor: pointer;     
+    }
+    
+    &:hover{
+        font-weight: 700 ;
     }
 
-    &:hover:not(.active) {
-        font-weight: 700;
-    }
 `;

@@ -13,6 +13,7 @@ export const Movies = styled.ul`
 
         svg {
             position: absolute;
+            top: 2px;
         }
 
         .disabled-info-icon {

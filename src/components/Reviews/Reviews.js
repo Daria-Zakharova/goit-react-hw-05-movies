@@ -1,8 +1,7 @@
-import { useLayoutEffect } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails } from "utils/fetch-movies";
+import { scrollToDetails } from "utils/scrollToDetails";
 import { ReviewsList } from "./Reviews.styled";
 
 const ReviewItem = ({author, content}) => {
@@ -14,7 +13,7 @@ const ReviewItem = ({author, content}) => {
     )
 } 
 
-export const Reviews = () => {
+export default function Reviews () {
     const {id} = useParams(); 
     const [reviews, setReviews] = useState([]);
 
@@ -27,18 +26,12 @@ export const Reviews = () => {
     }, [id]);
 
     useLayoutEffect(() => {  
-        // smooth scroll on next page render
-        if(reviews) {
-          window.scrollBy({
-            top: (window.innerHeight / 2),
-            behavior: 'smooth',
-          });
-        } 
+        scrollToDetails(reviews); 
       },[reviews]);
     
     return (
     <>        
-        {!reviews.length ? (<p style={{paddingLeft: '100px'}}>We don't have any reviews for this movie</p>) :
+        {!reviews.length ? (<p style={{padding: '40px 100px'}}>We don't have any reviews for this movie</p>) :
         (<ReviewsList id='reviews'>            
             {reviews.map(({author, content, id}) => { return (<li key = {id}><ReviewItem author={author} content={content}/></li>)})}
         </ReviewsList>)}

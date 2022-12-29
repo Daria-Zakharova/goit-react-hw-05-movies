@@ -16,5 +16,10 @@ export const SearchForm = styled.form`
         justify-content: center;
         border-radius: 0px;
         border-left: none;
+        background-color: #d2d2d2;
+
+    &:hover, &:focus {
+        background-color: #f0f0f0;
+    }
     }
 `;

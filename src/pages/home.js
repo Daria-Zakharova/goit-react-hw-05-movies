@@ -2,8 +2,9 @@ import { getMovies } from "utils/fetch-movies";
 import { MovieList } from "components/MovieList/MovieList";
 import { useEffect, useState } from "react";
 
-export const Home = () => {
+export default function Home () {
     const [trending, setTrending] = useState([]);
+
     useEffect(() => {
         const getTrending = async () => {
             setTrending(await(await getMovies({requestType: 'trending' })).data.results);
@@ -13,7 +14,8 @@ export const Home = () => {
     
     return (
     <>
-        <MovieList movies = {trending}/>
-        
+        <h1 style={{paddingLeft: '100px', marginBottom: 0}}>Trending today:</h1>
+        <MovieList movies = {trending}/>        
     </>);
 };
+

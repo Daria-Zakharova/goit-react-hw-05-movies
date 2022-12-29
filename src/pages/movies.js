@@ -1,14 +1,22 @@
+import { useEffect, useState } from "react";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { getMovies } from "utils/fetch-movies";
 import { MovieList } from "components/MovieList/MovieList";
-import { useEffect, useState } from "react";
 import { MovieSearch } from "components/MovieSearch/MovieSearch";
-import { Outlet } from "react-router-dom";
 
-export const Movies = () => {
+export default function Movies () {
     const [movies, setMovies] = useState([]);
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+
+    const [searchParams, setSearchParams] = useSearchParams('');
+    
+
+    useEffect(() => {
+        const title = searchParams.get('title') ?? '';
+        title && setQuery(title);
+    }, [searchParams]);
 
     // infifnite scroll
     useEffect(() => {
@@ -19,7 +27,7 @@ export const Movies = () => {
         };
 
         const observer = new IntersectionObserver(() => {
-            setPage((page) => page + 1)
+            setPage(page => page + 1)
         }, options);
         const guard = document.querySelector('.guard');
         guard && observer.observe(guard);
@@ -31,6 +39,7 @@ export const Movies = () => {
             const pages = await(await getMovies('search', query)).data.total_pages;
             setTotalPages(pages);
         };
+
         query && getTotalPages();
         
     }, [query]);
@@ -47,15 +56,20 @@ export const Movies = () => {
         query && findMovies();
     }, [query, page]);
 
+    const onSearch = e => {
+        e.preventDefault();
+        const queryStr = e.target.elements.search.value.toLowerCase().trim();
+        setPage(1);
+        setMovies([]);
+        setQuery(queryStr);
+        queryStr && setSearchParams({title: queryStr});
+    }
+
     return (
-        <>
-        <Outlet/>
-        <MovieSearch onSubmit={e => {
-            e.preventDefault();
-            setPage(1);
-            setMovies([]);
-            setQuery(e.target.elements.search.value.toLowerCase().trim());}}/>
+        <>        
+        <MovieSearch onSubmit={onSearch}/>
         <MovieList movies = {movies}/>
+        <Outlet/>
         {page < totalPages && <div className="guard"/>}
         </>
     );
