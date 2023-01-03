@@ -14,6 +14,7 @@ export default function MoviePage () {
     const [genres, setGenres] = useState([]);
     const [overview, setOverview] = useState('');
     const [backUrl, setBackUrl] = useState('');
+    const [success, setSuccess] = useState();
 
     const {id} = useParams();
 
@@ -23,24 +24,29 @@ export default function MoviePage () {
 
     useEffect(() => {
         const getMovieInfo = async() => {
-            const {'poster_path': img, title, vote_average: rating, genres, overview} = await(await(getMovieById(id))).data;
-            setImg(img);
-            setTitle(title);
-            setRating((rating * 10).toFixed() + '%');
-            setOverview(overview);
-            setGenres(() => genres.map((item, idx) => idx === 0 ? item.name: item.name.toLowerCase()).join(', '));
+            try {
+                const {'poster_path': img, title, vote_average: rating, genres, overview} = await(await(getMovieById(id))).data;
+                setSuccess(true);
+                setImg(img);
+                setTitle(title);
+                setRating((rating * 10).toFixed() + '%');
+                setOverview(overview);
+                setGenres(() => genres.map((item, idx) => idx === 0 ? item.name: item.name.toLowerCase()).join(', '));
+            }
+            catch {
+                setSuccess(false)
+            }
+           
         }
         getMovieInfo();
     }, [id]);
 
     return (
-            <>            
-                {title ? (
-                    <>
-                        <BackBtn location={backUrl || '/movies'}/>    
-                        <Movie imgUrl={img} movieTitle={title} rating={rating} overview={overview} genres={genres}/>
-                        <MovieDetails/>
-                    </>) : <PageNotFound/>}
+            <>  {success === false && <PageNotFound/>}       
+                {success === true && (<>
+                    <BackBtn location={backUrl || '/movies'}/>    
+                <Movie imgUrl={img} movieTitle={title} rating={rating} overview={overview} genres={genres}/>
+                <MovieDetails/></>)}
             </>
         )
 }
