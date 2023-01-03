@@ -10,7 +10,6 @@ export default function Movies () {
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [success, setSuccess] = useState();
 
     const [searchParams, setSearchParams] = useSearchParams('');    
 
@@ -48,14 +47,11 @@ export default function Movies () {
     // render movies
     useEffect(() => {
         const findMovies = async () => {
-            try{
+            if (page) {
                 const newMovies = await(await getMovies({requestType: 'search', query, page})).data.results;
-                setMovies(movies => [...movies, ...newMovies]);
-                setSuccess(true);
+                setMovies(movies => [...movies, ...newMovies]); 
             }
-            catch {
-                setSuccess(false);
-            } 
+            return;
         }
         query && findMovies();
     }, [query, page]);
@@ -72,8 +68,8 @@ export default function Movies () {
     return (
         <>        
         <MovieSearch onSubmit={onSearch} />
-        {success === false && <NoDataMsg message = {`Sorry, there is no movie titled ${query}`}/>}
-        {success === true && <MovieList movies = {movies}/>}
+        {query && !movies.length && <NoDataMsg message = {`Sorry, there is no movie titled ${query}`}/>}
+        {movies.length !== 0 && <MovieList movies = {movies}/>}
 
         <Outlet/>
         {page < totalPages && <div className="guard"/>}
