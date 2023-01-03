@@ -68,7 +68,7 @@ export default function Movies () {
     return (
         <>        
         <MovieSearch onSubmit={onSearch} />
-        {query && !movies.length && <NoDataMsg message = {`Sorry, there is no movies titled ${query}`}/>}
+        {query && !movies.length && <NoDataMsg message = {`Sorry, there is no movie titled ${query}`}/>}
         {movies.length !== 0 && <MovieList movies = {movies}/>}
 
         <Outlet/>
