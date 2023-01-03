@@ -4,6 +4,7 @@ import { BackBtn } from "components/BackBtn/BackBtn";
 import { Movie } from "components/Movie/Movie";
 import { MovieDetails } from "components/MovieDetails/MovieDetails";
 import { getMovieById } from "utils/fetch-movies";
+import PageNotFound from "./404";
 
 export default function MoviePage () {
     const location = useLocation();
@@ -33,9 +34,13 @@ export default function MoviePage () {
     }, [id]);
 
     return (
-        <>
-            <BackBtn location={backUrl || '/movies'}/>
-            <Movie imgUrl={img} movieTitle={title} rating={rating} overview={overview} genres={genres}/>
-            <MovieDetails/>
-        </>)
+            <>            
+                {title ? (
+                    <>
+                        <BackBtn location={backUrl || '/movies'}/>    
+                        <Movie imgUrl={img} movieTitle={title} rating={rating} overview={overview} genres={genres}/>
+                        <MovieDetails/>
+                    </>) : <PageNotFound/>}
+            </>
+        )
 }

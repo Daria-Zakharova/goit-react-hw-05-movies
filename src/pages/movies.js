@@ -3,6 +3,7 @@ import { Outlet, useSearchParams } from "react-router-dom";
 import { getMovies } from "utils/fetch-movies";
 import { MovieList } from "components/MovieList/MovieList";
 import { MovieSearch } from "components/MovieSearch/MovieSearch";
+import { NoDataMsg } from "components/NoDataMsg/NoDataMsg";
 
 export default function Movies () {
     const [movies, setMovies] = useState([]);
@@ -10,8 +11,7 @@ export default function Movies () {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    const [searchParams, setSearchParams] = useSearchParams('');
-    
+    const [searchParams, setSearchParams] = useSearchParams('');    
 
     useEffect(() => {
         const title = searchParams.get('title') ?? '';
@@ -67,8 +67,10 @@ export default function Movies () {
 
     return (
         <>        
-        <MovieSearch onSubmit={onSearch}/>
-        <MovieList movies = {movies}/>
+        <MovieSearch onSubmit={onSearch} />
+        {query && !movies.length && <NoDataMsg message = {`Sorry, there is no movies titled ${query}`}/>}
+        {movies.length !== 0 && <MovieList movies = {movies}/>}
+
         <Outlet/>
         {page < totalPages && <div className="guard"/>}
         </>

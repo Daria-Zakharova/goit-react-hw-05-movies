@@ -1,3 +1,4 @@
+import { NoDataMsg } from "components/NoDataMsg/NoDataMsg";
 import { useLayoutEffect, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails } from "utils/fetch-movies";
@@ -31,7 +32,7 @@ export default function Reviews () {
     
     return (
     <>        
-        {!reviews.length ? (<p style={{padding: '40px 100px'}}>We don't have any reviews for this movie</p>) :
+        {!reviews.length ? (<NoDataMsg message="We don't have any reviews for this movie"/>) :
         (<ReviewsList id='reviews'>            
             {reviews.map(({author, content, id}) => { return (<li key = {id}><ReviewItem author={author} content={content}/></li>)})}
         </ReviewsList>)}
