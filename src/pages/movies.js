@@ -59,6 +59,8 @@ export default function Movies () {
     const onSearch = e => {
         e.preventDefault();
         const queryStr = e.target.elements.search.value.toLowerCase().trim();
+        if (queryStr === query) {
+          return;}
         setPage(1);
         setMovies([]);
         setQuery(queryStr);
