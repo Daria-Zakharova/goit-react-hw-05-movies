@@ -32,7 +32,7 @@ export default function Reviews () {
     
     return (
     <>        
-        {!reviews.length ? (<NoDataMsg message="We don't have any reviews for this movie"/>) :
+        {!reviews.length ? (<NoDataMsg message="We don't have any reviews for this movie" margin={true}/>) :
         (<ReviewsList id='reviews'>            
             {reviews.map(({author, content, id}) => { return (<li key = {id}><ReviewItem author={author} content={content}/></li>)})}
         </ReviewsList>)}

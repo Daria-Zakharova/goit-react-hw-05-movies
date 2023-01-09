@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 
 export const SearchForm = styled.form`
     display: flex;
-    padding: 40px 0 0 100px;
+    justify-content: center;
+    margin-bottom: 40px;
 
     input{
         padding: 5px;

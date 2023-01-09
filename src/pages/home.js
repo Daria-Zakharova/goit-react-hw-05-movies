@@ -14,7 +14,7 @@ export default function Home () {
     
     return (
     <>
-        <h1 style={{paddingLeft: '100px', marginBottom: 0}}>Trending today:</h1>
+        <h1 style={{marginBottom: '40px',}}>Trending today:</h1>
         <MovieList movies = {trending}/>        
     </>);
 };

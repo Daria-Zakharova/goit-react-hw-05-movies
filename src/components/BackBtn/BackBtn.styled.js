@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const BackLink = styled(Link)`
     display: block;
     width: fit-content;
-    margin: 40px 100px 0;
+    margin-bottom: 40px;
     padding: 10px;
     border: 2px solid #000;
     border-radius: 5px;

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const MovieInfo = styled.section`
     display: flex;
-    padding: 40px 100px;
+    padding-bottom: 40px;
     gap: 40px;
     border-bottom: solid 2px #000; 
 

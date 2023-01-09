@@ -1,7 +1,7 @@
 import { Msg } from "./NoDataMsg,styled"
 
-export const NoDataMsg = ({message}) => {
+export const NoDataMsg = ({message, margin = false}) => {
     return (
-        <Msg>{message}</Msg>
+        <Msg margin={margin}>{message}</Msg>
     )
 }

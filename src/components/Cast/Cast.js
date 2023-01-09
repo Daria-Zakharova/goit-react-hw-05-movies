@@ -41,7 +41,7 @@ export default function Cast () {
 
     return (
         <>
-            {cast.length === 0 && <NoDataMsg message = 'Sorry, the cast is unknown'/>}
+            {cast.length === 0 ?<NoDataMsg message = 'Sorry, the cast is unknown' margin={true}/> :
         <CastList>
             {cast.map(({name, character, profile_path, cast_id}) => {
                 return (
@@ -51,7 +51,7 @@ export default function Cast () {
                 )
             })
             }
-        </CastList>
+        </CastList>}
         </>
     )
 }

@@ -26,7 +26,7 @@ export const globalStyle = {
       textDecoration: 'none',
     },
 
-    p: {
+    'p, h1': {
       margin: 0,
       padding: 0,
     },
