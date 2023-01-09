@@ -16,7 +16,7 @@ const CastItem = ({name, character, profile_path: imgUrl}) => {
         <Actor>
             <img className="photo" src={imgUrl ? (baseImgUrl + imgUrl) : castPlaceholder} alt={name + " photo"}/>
             <p className="name">{name}</p>
-            <p><b>Character:</b> {character}</p>
+            {character && <p><b>Character:</b> {character}</p>}
         </Actor>
     )
 }
